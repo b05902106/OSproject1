@@ -1,14 +1,13 @@
+#define _GNU_SOURCE
 #include <stdio.h>
-#include <stdlib.h>
 #include <string.h>
-
-struct process{
-	char name[50];
-	int pid;
-	int ready_time;
-	int exec_time;
-};
-
+#include <stdlib.h>
+#include <sched.h>
+#include <errno.h>
+#include <unistd.h>
+#include "processer.h"
+#include "schedule.h"
+#include <linux/kernel.h>
 int main()
 {
 	char policy[50];
@@ -28,6 +27,6 @@ int main()
 		fprintf(stderr, "bad policy!\n");
 		exit(0);
 	}
-	schedule(processes, processnum, schpolicy);
+	scheduler(processes, processnum, schpolicy);
 	return 0;
 }
